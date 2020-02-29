@@ -30,7 +30,6 @@ export class Deck {
 			this.Doors[newPos] = this.Doors[i];
 			this.Doors[i] = hold;
 		}
-		this.Doors.forEach(val => console.log(val.cardInfo.name));
 	};
 
 	shuffleTreasure = () => {
@@ -40,7 +39,6 @@ export class Deck {
 			this.Treasure[newPos] = this.Treasure[i];
 			this.Treasure[i] = hold;
 		}
-		this.Treasure.forEach(val => console.log(val.cardInfo.name));
 	};
 
 	drawDoor: () => DoorCard = () => this.Doors.shift();

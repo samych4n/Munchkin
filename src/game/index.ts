@@ -12,7 +12,6 @@ export class Game implements IGameStateMachine {
 
 	constructor(deckInfo: IDeckInfo, public players: Player[]) {
 		this.deck = createDeck(deckInfo);
-		this.players = players;
 		this.changeState(new StartGame(this));
 	}
 
