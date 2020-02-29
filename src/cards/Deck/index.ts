@@ -1,9 +1,9 @@
-import { DeckInfo } from '../interfaces/DeckInfo';
+import { IDeckInfo } from '../interfaces/DeckInfo';
 import { TreasureCard } from '../interfaces/TreasureCard';
 import { DoorCard } from '../interfaces/DoorCard';
-import { Card } from '../interfaces/Card';
+import { ICard } from '../interfaces/Card';
 
-export function createDeck(deckInfo: DeckInfo) {
+export function createDeck(deckInfo: IDeckInfo) {
 	const cards = [];
 	deckInfo.cards.forEach(card => {
 		for (let x = 0; x < card.amount; x++) {
@@ -18,7 +18,7 @@ export class Deck {
 
 	private Treasure: TreasureCard[];
 
-	constructor(private cards: Card[]) {
+	constructor(private cards: ICard[]) {
 		this.Doors = cards.filter(card => card instanceof DoorCard);
 		this.Treasure = cards.filter(card => card instanceof TreasureCard);
 	}

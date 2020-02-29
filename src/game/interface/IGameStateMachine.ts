@@ -1,5 +1,5 @@
-import { State } from './State';
+import { IState } from './IState';
 
-export interface GameStateMachine {
-	changeState: (state: State) => void;
+export interface IGameStateMachine {
+	changeState: (state: IState) => void;
 }

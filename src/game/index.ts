@@ -1,22 +1,22 @@
-import { createDeck, Deck } from '../../cards/Deck/index';
-import { DeckInfo } from '../../cards/interfaces/DeckInfo';
-import Player from '../../player';
-import { State } from './State';
-import { GameStateMachine } from './GameStateMachine';
-import { StartGame } from './StartGame';
+import { createDeck, Deck } from '../cards/Deck/index';
+import { IDeckInfo } from '../cards/interfaces/DeckInfo';
+import Player from '../player';
+import { IState } from './interface/IState';
+import { IGameStateMachine } from './interface/IGameStateMachine';
+import { StartGame } from './States/StartGame';
 
-export class Game implements GameStateMachine {
+export class Game implements IGameStateMachine {
 	private state;
 
 	public deck: Deck;
 
-	constructor(deckInfo: DeckInfo, public players: Player[]) {
+	constructor(deckInfo: IDeckInfo, public players: Player[]) {
 		this.deck = createDeck(deckInfo);
 		this.players = players;
 		this.changeState(new StartGame(this));
 	}
 
-	changeState = (state: State) => {
+	changeState = (state: IState) => {
 		if (this.state) {
 			this.state.destroy();
 		}

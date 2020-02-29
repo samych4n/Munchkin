@@ -1,6 +1,6 @@
-import { CardInfo } from './CardInfo';
+import { ICardInfo } from './CardInfo';
 
 export interface ICard {
-	cardInfo: CardInfo;
+	cardInfo: ICardInfo;
 	playCard: () => void;
 }

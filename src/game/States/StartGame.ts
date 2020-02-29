@@ -1,7 +1,7 @@
-import { State } from '../interface/State';
+import { IState } from '../interface/IState';
 import { Game } from '..';
 
-export class StartGame implements State {
+export class StartGame implements IState {
 	constructor(private game: Game) {}
 
 	static observer;

@@ -1,8 +1,8 @@
 import { TreasureCard } from '../interfaces/TreasureCard';
-import { CardInfo } from '../interfaces/CardInfo';
+import { ICardInfo } from '../interfaces/CardInfo';
 
 export class LogCardTreasure extends TreasureCard {
-	constructor(public cardInfo: CardInfo) {
+	constructor(public cardInfo: ICardInfo) {
 		super();
 	}
 

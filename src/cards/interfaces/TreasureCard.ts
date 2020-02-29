@@ -1,8 +1,8 @@
-import { CardInfo } from './CardInfo';
-import { Card } from './Card';
+import { ICardInfo } from './CardInfo';
+import { ICard } from './Card';
 
-export abstract class TreasureCard implements Card {
-	abstract cardInfo: CardInfo;
+export abstract class TreasureCard implements ICard {
+	abstract cardInfo: ICardInfo;
 
 	abstract playCard: () => void;
 }

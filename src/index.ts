@@ -1,5 +1,5 @@
 import { teste } from './cards/Deck/teste2'
-import { Game } from './game/interface'
+import { Game } from "./game";
 import Player from './player';
 const players = [
         new Player("Samuel"),
