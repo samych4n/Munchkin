@@ -1,26 +1,26 @@
-import { DeckInfo } from "../interfaces";
-import { LogCardDoor, LogCardTreasure } from "../types/LogCard";
+import { DeckInfo } from '../interfaces/DeckInfo';
+import { LogCardTreasure } from '../types/LogCardTreasure';
+import { LogCardDoor } from '../types/LogCardDoor';
 
-export const teste:DeckInfo =
-{
-    cards:[
-        {
-            type:LogCardTreasure,
-            amount:2,
-            CardInfo:{
-                name:"TESTE 123",
-                description:"laksjdklasjdkl",
-                value:100,
-            }
-        },
-        {
-            type:LogCardDoor,
-            amount:8,
-            CardInfo:{
-                name:"TESTE 123 door",
-                description:"alguma coisa",
-                value:100,
-            }
-        },
-    ]
-}
+export const teste: DeckInfo = {
+	cards: [
+		{
+			Type: LogCardTreasure,
+			amount: 30,
+			CardInfo: {
+				name: 'TESTE 123',
+				description: 'laksjdklasjdkl',
+				value: 100,
+			},
+		},
+		{
+			Type: LogCardDoor,
+			amount: 30,
+			CardInfo: {
+				name: 'TESTE 123 door',
+				description: 'alguma coisa',
+				value: 100,
+			},
+		},
+	],
+};

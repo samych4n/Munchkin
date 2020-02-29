@@ -1,25 +1,49 @@
-import { DeckInfo } from "../interfaces";
+import { DeckInfo } from '../interfaces/DeckInfo';
+import { TreasureCard } from '../interfaces/TreasureCard';
+import { DoorCard } from '../interfaces/DoorCard';
+import { Card } from '../interfaces/Card';
 
-export function createDeck(deckInfo:DeckInfo){
-    let cards = [];
-    deckInfo.cards.forEach(cardInfo => {for(let x = 0; x<cardInfo.amount; x++){ cards.push(new cardInfo.type(cardInfo))}});
-    console.log(cards);
-    return new Deck(cards);
+export function createDeck(deckInfo: DeckInfo) {
+	const cards = [];
+	deckInfo.cards.forEach(card => {
+		for (let x = 0; x < card.amount; x++) {
+			cards.push(new card.Type({ ...card.CardInfo }));
+		}
+	});
+	return new Deck(cards);
 }
 
-class Deck{
-    constructor(private cards){}
+export class Deck {
+	private Doors: DoorCard[];
 
-    shuffle = () => {
-        for(let i = 0; i < this.cards.length;i++){
-            let newPos = Math.floor(Math.random() * this.cards.length);
-            let hold = this.cards[newPos];
-            this.cards[newPos] = this.cards[i];
-            this.cards[i] = hold;
-        }
-        this.cards.forEach(val => console.log(val.nome));
-    };
-    drawCard = () => {
-        return this.cards.shift();
-    };
+	private Treasure: TreasureCard[];
+
+	constructor(private cards: Card[]) {
+		this.Doors = cards.filter(card => card instanceof DoorCard);
+		this.Treasure = cards.filter(card => card instanceof TreasureCard);
+	}
+
+	shuffleDoors = () => {
+		for (let i = 0; i < this.Doors.length; i++) {
+			const newPos = Math.floor(Math.random() * this.Doors.length);
+			const hold = this.Doors[newPos];
+			this.Doors[newPos] = this.Doors[i];
+			this.Doors[i] = hold;
+		}
+		this.Doors.forEach(val => console.log(val.cardInfo.name));
+	};
+
+	shuffleTreasure = () => {
+		for (let i = 0; i < this.Treasure.length; i++) {
+			const newPos = Math.floor(Math.random() * this.Treasure.length);
+			const hold = this.Treasure[newPos];
+			this.Treasure[newPos] = this.Treasure[i];
+			this.Treasure[i] = hold;
+		}
+		this.Treasure.forEach(val => console.log(val.cardInfo.name));
+	};
+
+	drawDoor: () => DoorCard = () => this.Doors.shift();
+
+	drawTreasure: () => TreasureCard = () => this.Treasure.shift();
 }
