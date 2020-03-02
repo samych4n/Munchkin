@@ -1,13 +1,9 @@
 import { EquipableCard } from '../cards/interfaces/EquipableCard';
 import { ICard } from '../cards/interfaces/Card';
-import { Dice } from '../Board/Dice';
+import { DrawCard } from '../Notification';
 
 export default class Player {
-	dice: Dice;
-
-	constructor(public name: string) {
-		this.dice = new Dice(6);
-	}
+	constructor(public name: string) {}
 
 	level: number = 1;
 
@@ -17,5 +13,10 @@ export default class Player {
 
 	itens: ICard[];
 
-	drawCard = (card: ICard) => this.dice.roll() && this.hand.push(card);
+	drawCard = (card: ICard) => {
+		this.hand.push(card);
+		DrawCard.next({ player: this, card });
+	};
+
+	private hasCard = (card: ICard) => this.hand.find(val => val === card);
 }

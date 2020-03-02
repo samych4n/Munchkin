@@ -1,16 +1,6 @@
-/* eslint-disable max-classes-per-file */
-export class Action<T> {
-	protected actions: ((arg: T) => void)[] = [];
+import RollDice from './RollDice';
+import KickDoor from './KickDoor';
 
-	addEventListener = (event: (arg: T) => void) => {
-		this.actions.push(event);
-	};
+export = { ...KickDoor, RollDice };
 
-	removeEventListener = (event: (arg: T) => void) => {
-		this.actions = this.actions.filter(action => event !== action);
-	};
-
-	call = (arg: T) => {
-		this.actions.forEach(action => action(arg));
-	};
-}
+// export default actions;

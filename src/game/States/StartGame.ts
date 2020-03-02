@@ -1,15 +1,19 @@
+import { Subscription } from 'rxjs';
 import { IState } from '../interface/IState';
 import { Game } from '..';
 import Player from '../../player';
-import { PreparePhase } from './PrepareFase';
+import { PreparePhase } from './PreparePhase';
+import { DiceRoll } from '../../Notification';
 
 export class StartGame implements IState {
+	diceRoll$: Subscription;
+
 	constructor(private game: Game) {}
 
-	private playerOrder: { player: Player; number: number }[] = [];
-
 	execute = () => {
-		const { deck, players } = this.game;
+		this.diceRoll$ = DiceRoll.subscribe(this.listenDiceRoll());
+		const { players } = this.game;
+		const { deck } = this.game.board;
 		deck.shuffleDoors();
 		deck.shuffleTreasure();
 		players.forEach(player => {
@@ -22,30 +26,31 @@ export class StartGame implements IState {
 			player.drawCard(deck.drawTreasure());
 			player.drawCard(deck.drawTreasure());
 		});
-		players.forEach(player => {
-			player.dice.RollDice.addEventListener(this.ReadPlayerDice(player));
-		});
 	};
 
-	ReadPlayerDice = (player: Player) => {
-		const readDice = (number: number) => {
-			this.playerOrder.push({ player, number });
-			console.log(`jogador ${player.name} tirou um ${number}`);
-			player.dice.RollDice.removeEventListener(readDice);
-			if (this.playerOrder.length === this.game.players.length)
-				this.changePlayersOrder();
+	listenDiceRoll = () => {
+		const playerOrder = [];
+		return ({ player, value }: { player: Player; value: number }) => {
+			if (!playerOrder.find(val => val.player === player))
+				playerOrder.push({ player, value });
+			if (playerOrder.length === this.game.players.length) {
+				this.changePlayersOrder(
+					playerOrder
+						.sort((a, b) => b.number - a.number)
+						.map(playerOrder => playerOrder.player)
+				);
+			}
 		};
-		return readDice;
 	};
 
-	changePlayersOrder = () => {
-		this.game.players = this.playerOrder
-			.sort((a, b) => b.number - a.number)
-			.map(playerOrder => playerOrder.player);
+	changePlayersOrder = playerOrder => {
+		this.game.players = playerOrder;
 		this.game.changeState(
 			new PreparePhase(this.game, this.game.players[0])
 		);
 	};
 
-	destroy = () => {};
+	destroy = () => {
+		this.diceRoll$.unsubscribe();
+	};
 }

@@ -4,14 +4,15 @@ import Player from '../player';
 import { IState } from './interface/IState';
 import { IGameStateMachine } from './interface/IGameStateMachine';
 import { StartGame } from './States/StartGame';
+import { Board } from '../Board';
 
 export class Game implements IGameStateMachine {
 	private state;
 
-	public deck: Deck;
+	board: Board;
 
 	constructor(deckInfo: IDeckInfo, public players: Player[]) {
-		this.deck = createDeck(deckInfo);
+		this.board = new Board(deckInfo);
 		this.changeState(new StartGame(this));
 	}
 

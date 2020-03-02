@@ -1,6 +1,6 @@
 import { IDeckInfo } from '../../interfaces/DeckInfo';
-import { LogCardTreasure } from '../../types/LogCardTreasure';
-import { LogCardDoor } from '../../types/LogCardDoor';
+import { LogCardTreasure } from '../../types/Treasure/LogCardTreasure';
+import { LogCardDoor } from '../../types/Door/LogCardDoor';
 
 export const teste: IDeckInfo = {
 	cards: [

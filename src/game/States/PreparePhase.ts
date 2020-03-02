@@ -5,8 +5,11 @@ import { Game } from '..';
 export class PreparePhase implements IState {
 	constructor(private Game: Game, private currentPlayer: Player) {}
 
-	execute = () => {
-		console.log(`Vez de: ${this.currentPlayer.name}`);
+	execute = () => {};
+
+	passPhase = (player: Player) => {
+		console.log(this.currentPlayer.name, player.name);
+		if (this.currentPlayer === player) console.log('next phase');
 	};
 
 	destroy: () => void;

@@ -1,5 +1,5 @@
-import { DoorCard } from '../interfaces/DoorCard';
-import { ICardInfo } from '../interfaces/CardInfo';
+import { DoorCard } from '../../interfaces/DoorCard';
+import { ICardInfo } from '../../interfaces/CardInfo';
 
 export class LogCardDoor extends DoorCard {
 	constructor(public cardInfo: ICardInfo) {

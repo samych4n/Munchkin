@@ -1,5 +1,5 @@
-import { TreasureCard } from '../interfaces/TreasureCard';
-import { ICardInfo } from '../interfaces/CardInfo';
+import { TreasureCard } from '../../interfaces/TreasureCard';
+import { ICardInfo } from '../../interfaces/CardInfo';
 
 export class LogCardTreasure extends TreasureCard {
 	constructor(public cardInfo: ICardInfo) {
